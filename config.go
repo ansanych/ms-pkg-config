@@ -12,6 +12,13 @@ type Mongo struct {
 	DB   string `json:"db"`
 }
 
+type Mysql struct {
+	Host     string `json:"host"`
+	DB       string `json:"db"`
+	User     string `json:"user"`
+	Password string `json:"password"`
+}
+
 type ServiceAddress struct {
 	Host string `json:"host"`
 	Port int    `json:"port"`
@@ -19,12 +26,15 @@ type ServiceAddress struct {
 
 type Config struct {
 	Service    string         `json:"service"`
-	Connector  ServiceAddress `json:"connector"`
-	Mongo      Mongo          `json:"mongo"`
-	Debug      bool           `json:"debug"`
-	OnlyErrors bool           `json:"onlyErrors"`
 	Address    ServiceAddress `json:"address"`
+	Connector  ServiceAddress `json:"connector"`
 	Clients    []string       `json:"clients"`
+	Mongo      Mongo          `json:"mongo"`
+	Mysql      Mysql          `json:"mysql"`
+	AccessKey  string         `json:"accessKey"`
+	RefreshKey string         `json:"refreshKey"`
+	OnlyErrors bool           `json:"onlyErrors"`
+	Debug      bool           `json:"debug"`
 }
 
 func GetConfig(rootDir string) (*Config, error) {
